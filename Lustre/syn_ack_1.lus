@@ -1,0 +1,34 @@
+-- Every time the request req goes high, ack arrives exactly 3 clocks later
+node Syn_Ack(req: bool) returns ( ack: bool );
+let
+    ack = counter(req) = 3;
+tel
+
+-- Every time the valid signal vld is high, the cnt is incremented
+-- node counter(vid: bool) returns ( C: int );
+-- let
+--   C = 0 -> if (not pre vid or pre C = 3) then 
+--                 0
+--             else pre C + 1;
+--   check true -> pre vid and not (pre C = 3) => pre C < C;
+--   ----%MAIN;
+-- tel
+
+-- node counter(vid: bool) returns ( C: int );
+-- let
+--   C = 0 -> if (vid and pre C < 3 ) then 
+--                 pre C + 1
+--             else 0;
+--   check true -> pre vid and not (pre C = 3) => pre C < C;
+--   ----%MAIN;
+-- tel
+
+node counter(vid: bool) returns ( C: int );
+(*@contract
+  guarantee C >= 0 and C <= 3 ;
+*)
+let
+  C = 0 -> if pre C = 3 then 0
+            else if vid or pre C > 0 then pre C + 1 
+            else pre C;
+tel

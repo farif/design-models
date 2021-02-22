@@ -1,0 +1,25 @@
+(* Traffic light controller
+
+                         ooo
+     ------------------==-------------------
+                       ==   <-
+                  ->   ==
+     ------------------==-------------------
+                    ooo
+*)
+
+node TrafficLight( Press : bool ) returns ( Red, Green, Yellow, Walk, Stop : bool ) ;
+var on : bool;
+let
+    on = false -> Press or (0 < Timer(pre on) and Timer(pre on) < 10);
+    Red = on and Timer(on) < 8 ;
+    Yellow =  false -> 8 <= Timer(pre on) and  Timer(pre on) < 10;
+    Green = not on;
+    Walk = Red;
+    Stop = not Walk;
+tel
+
+node Timer( on: bool ) returns ( counter : int) ;
+let
+    counter = 0 -> if on then pre counter + 1 else 0 ;
+tel

@@ -1,0 +1,39 @@
+type object = enum{g,c,w,e}; 
+--type init_bank = false;
+--type dest_bank = true;
+
+node ferryman_puzzle(i:bool) returns (o:bool);
+-- Ferryman,goat,cabbage,worlf,carry = false --> init_bank
+-- Ferryman,goat,cabbage,worlf,carry = true --> dest_bank
+
+var ferryman: bool;
+var goat: bool;
+var cabbage: bool;
+var wolf: bool;
+var carry: object;
+let
+--1.
+    ferryman = rowing();
+    
+    carry = if ferryman = goat  then g 
+            else
+            if ferryman = cabbage then c
+            else         
+            if ferryman = wolf then w
+            else
+                e;
+                
+    goat = (ferryman = goat) and pre carry = g 
+--2. 
+tel
+
+-- contract move_bank(i:bool) returns (o:bool);
+-- bool_choose() simulates a non-deterministic choice,
+-- at each step of the computation, between the two Boolean values.
+node imported rowing() returns (b: bool) ;
+
+node imported real_choose() returns (z: real) ;
+(*@contract
+  guarantee 0.0 <= z and z <= 2.0 ;
+*)
+

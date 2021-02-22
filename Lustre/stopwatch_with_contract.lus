@@ -1,0 +1,23 @@
+contract stopwatchSpec(toggle, reset: bool) returns (timer: real) ;
+let
+    var on: bool = (false -> pre on) <> toggle ;
+
+    assume not (toggle and reset) ;
+    
+    guarantee "Timer" timer >= 0.0 ;
+    guarantee "Running" (on and not reset) => timer = (0.0 -> pre timer + 0.01) ; 
+    guarantee "Stop"  not on and not reset  => timer = (0.0 -> pre timer) ;
+    guarantee "Reset" reset => timer = 0.0 ;
+
+tel
+
+node stopwatch(toggle, reset:bool) returns (timer:real) ;
+(*@contract import stopwatchSpec(toggle, reset) returns (timer); *)
+var running: bool;
+let
+    running = (false -> pre running) <> toggle ;
+    
+    timer = 0.0 -> if reset then 0.0 else 
+                 if running then pre timer + 0.01
+                 else pre timer ;
+tel

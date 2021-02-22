@@ -1,0 +1,37 @@
+node Flipflop( D: bool; clk: bool ) returns ( Q: bool );
+let
+    Q = if clk then D 
+        else Delay(Q);
+tel
+
+node Flipflop2( D: bool; clk: bool ) returns ( Q: bool );
+let
+    Q = if RisingEdge(clk) then D 
+        else Delay(Q);
+tel
+
+node RisingEdge( clk: bool ) returns ( RisingEdge: bool );
+let
+    RisingEdge = false -> not pre clk and clk; 
+tel
+
+node Delay( Q: bool ) returns ( Q_old: bool );
+let
+    Q_old = false -> pre Q;
+tel
+
+node Flipflop1( D: bool; clk: bool ) returns ( Q: bool );
+let
+    Q = Multiplexer(clk, D, Delay(Q));
+tel
+
+node Multiplexer( X, Y, Z: bool ) returns ( Q: bool);
+let
+    Q = (X and Y) or (not X and Z);
+tel
+
+node Obs( D: bool; clk: bool ) returns ( Q: bool );
+let
+    Q = (Flipflop(D, clk) =  Flipflop2(D, clk));
+    check  Q;
+tel

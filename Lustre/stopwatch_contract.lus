@@ -1,0 +1,23 @@
+contract stopwatchSpec(toggle, reset: bool) returns (timer: int) ;
+let
+
+    var on: bool = (false -> pre on) <> toggle ;
+
+    assume not (toggle and reset);
+    
+    guarantee "Non-negative Timer value" timer >= 0 ;
+    guarantee "Running" (on and not reset) => timer = (0 -> pre timer + 1) ;
+    guarantee "Stop"  (not on and not reset) => timer = (0 -> pre timer);
+    guarantee "Reset" reset => timer = 0;
+
+tel
+
+node stopwatch( toggle, reset: bool ) returns ( timer: int );
+(*@contract import stopwatchSpec(toggle, reset ) returns (timer) ; *)
+  var running: bool;
+let
+    running = (false -> pre running) <> toggle;
+    timer = if reset then 0 else 
+            if running then 0 -> pre timer + 1
+            else 0 -> pre timer;
+tel

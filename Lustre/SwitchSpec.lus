@@ -1,0 +1,29 @@
+node Switch( Set, Reset, Init : bool ) returns ( X : bool );
+let
+    X = Set or (not Reset and  (Init -> pre X));
+tel
+
+node SwitchSpec( Set, Reset, Init : bool )
+returns ( R1, R2, R3, R4 : bool );
+var X : bool;
+let
+  X = Switch( Set, Reset, Init );
+  -- Set turn on the switch.
+  R1 = Set => X;
+  check R1;
+  -- Reset turn off the switch.
+  R2 =  not Set and Reset => not X;
+  check R2;
+  -- Stable state if set and reset doesn't change.
+  R3 = true -> not Set and not Reset => pre X = X;
+  check R3;
+  
+  -- Switch stays on if since Set no reset has occured.
+  R4 = S(not Reset, Set) => X;
+  check R4;
+tel
+
+node S( I, J : bool) returns ( O: bool );
+let
+    O = J or (I and (false -> pre O)) ;
+tel
