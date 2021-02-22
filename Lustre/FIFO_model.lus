@@ -18,7 +18,7 @@
 -- Q_EMPTY: Queue is empty and contains no message. 
 ---------------------------------------------------
 
--- Model of FIFO Queue in Lustre
+-- Model of FIFO queue
 type msg = int;
 const MAX:int = 8;
 
@@ -43,7 +43,7 @@ let
    Q_EMPTY = true -> (pre msg_adr = 0);
 
    mem[msg_adr] = -1 -> if write_event and msg_adr < 7 then data_in else pre mem[msg_adr];
---   data_out = -1 -> if read_event then mem[1] else -1 ;
+   data_out = -1 -> if read_event then mem[1] else -1 ;
 tel
 
 -- Safety Assertions.
@@ -60,7 +60,7 @@ let
     check true -> not(pre Q_EMPTY) and Q_EMPTY => pre read_event;
 --P4. Simaltanous read and write events do not overflow or underflow the queue. 
     check true -> read_event and write_event => Sofar(Q_EMPTY = Q_EMPTY) and Sofar(Q_FULL = Q_FULL) ;
---P5. What goes in First should come out First.  
+--P5. What goes in first should come out first (Order of messages remain preserved)?  
 tel
 
 

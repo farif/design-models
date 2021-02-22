@@ -1,5 +1,5 @@
--- Count the number of bits that are set to '1' in an integer of size 32.
--- Algoritm starts with 2 bit counter then 4, 8 and 16 bits.
+-- Count the number of bits set to '1' in one Byte.
+-- Algoritm starts with counting 2 bits pair and then accumulate its results to 4 bits pair to 8 pair  and 16 bits pair.
 --   0x55555555 = 0b01010101010101010101010101010101)
 --   0x33333333 = 0b00110011001100110011001100110011)
 --   0x0F0F0F0F = 0b00001111000011110000111100001111)
@@ -18,7 +18,6 @@ var  x3:uint8;
 var  x4:uint8;
 
 let
-
   x0 = (((uint8 i) rsh (uint8 1)) && (uint8 0x5555555) +  ((uint8 i) && (uint8 0x5555555)));
   x1 = ((x0 rsh (uint8 2)) && (uint8 0x33333333)) +  (x0 && (uint8 0x33333333));
   x2 = ((x1 rsh (uint8 4)) && (uint8 0x0F0F0F0F)) +  (x1 && (uint8 0x0F0F0F0F));

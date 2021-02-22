@@ -1,0 +1,14 @@
+-- Data/Delay flip-flop 
+-- Correct.
+node D_Flipflop(D: bool; clk: bool) returns (Q0, Q1: bool);
+let
+    Q0 = false -> if RisingEdge(clk) then D 
+                  else (pre Q0);
+    Q1 = not Q0;
+tel
+
+node RisingEdge( clk: bool ) returns ( RisingEdge: bool );
+let
+    RisingEdge = false -> not pre clk and clk; 
+tel
+

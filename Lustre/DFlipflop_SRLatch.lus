@@ -1,30 +1,24 @@
--- D Flip-Flop Lustre Model
-node D_FlipFlop(D, clk: bool) 
+-- Data/Delay flip-flop 
+-- Design reference: https://www.electronicshub.org/d-flip-flop/
+-- Incorrect
+node D_Flipflop(D, clk: bool) 
 returns (Q0,Q1: bool);
 var posedge: bool;
 let
   posedge = RisingEdge(clk);
-  (Q0,Q1) = SR_Latch(not D and posedge, D and posedge);
+  (Q0,Q1) = SR_Latch(D and posedge, not D and posedge);
   -- It is always the case that after start the flip-flop both outputs are complement of each other.
-  --%PROPERTY (Step(Q0) > 0 and D) => Q0 <> Q1 ; 
+  check Step(D) > 0  => Q0 <> Q1 ; 
   --%MAIN;
 tel
 
--- D Latch Lustre Model
-node D_Latch(D, EN: bool) 
-returns (Q0,Q1: bool);
-let
-  (Q0,Q1) = SR_Latch(not D and EN, D and EN);
-tel
-
--- SR Latch Lustre Model
+-- SR Latch 
 node SR_Latch(S, R: bool) 
 returns (Q0,Q1: bool);
 let
-  Q0 = false -> NOR (R, pre Q1);
-  Q1 = false -> NOR (S, pre Q0);
+  Q0 = false ->  NOR(R, pre Q1);
+  Q1 = false  -> NOR(S, pre Q0);
 tel
-
 
 -- Boolean NOR operand
 node NOR(P, Q: bool) 
