@@ -1,0 +1,47 @@
+contract puzzleSpec(w, g, c: bool) returns (o: bool);
+let
+
+    assume "Ferryman carries only one passenger at a time." 
+    (not w or not g) and (not g or not c) and (not w or not c) ;
+        
+tel
+
+node puzzle(w, g, c: bool) returns (o: bool);
+(*@contract import puzzleSpec(w, g, c) returns (o); *)
+
+var bank_m: bool;
+var bank_g: bool;
+var bank_w: bool;
+var bank_c: bool;
+
+var safe_cabbage: bool;
+var safe_goat: bool;
+
+let
+    -- Ferryman sails to east and west bank of the river.
+    bank_m = false -> not pre bank_m;
+
+    bank_g = false ->  if g and pre (bank_g = bank_m) then 
+                        not pre bank_m
+                       else pre bank_g; 
+
+    bank_w = false ->  if w and pre (bank_w = bank_m) then
+                        not pre bank_m
+                       else pre bank_w; 
+
+    bank_c = false ->  if c and pre (bank_c = bank_m) then
+                        not pre bank_m 
+                       else pre bank_c; 
+                       
+    safe_goat = true -> pre (bank_w <> bank_m) => not pre(bank_w = bank_g);
+    safe_cabbage = true -> pre (bank_g <> bank_m) => not pre(bank_g = bank_c);
+
+    --"Everyone cross to the west-bank" 
+    check  Sofar(safe_goat and safe_cabbage) => not (bank_w and bank_g and bank_c);
+    
+tel
+
+node Sofar( i : bool ) returns ( o : bool );
+let
+ o = i -> (i and (pre o));
+tel

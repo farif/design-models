@@ -1,0 +1,15 @@
+[options]
+mode bmc
+depth 100
+
+[engines]
+smtbmc
+
+[script]
+read -formal counterspec.sv
+prep -top counterspec
+
+
+[files]
+counterspec.sv
+counter.v

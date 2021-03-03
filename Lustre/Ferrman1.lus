@@ -1,0 +1,93 @@
+
+contract puzzleSpec(w, g, c: bool) returns (o: bool);
+let
+-- East Bank = false
+-- West Bank = true
+    -- Everyone is on east bank of the river in the start state.
+    var bank_m: bool = false;
+    var bank_g: bool = false;
+    var bank_w: bool = false;
+    var bank_c: bool = false;
+
+    assume "Ferryman carries only one passenger at a time." 
+    not (w and g) and not (g and c) and not (w and c) ;
+
+    -- Rowing between two banks.
+    assume "Ferryman trip b/t two river banks" 
+    bank_m = false -> not pre bank_m;
+
+                       
+    guarantee "Wolf and goat not left unattentive" 
+                (bank_w = bank_g) and not (bank_g <> bank_m);
+
+    guarantee "Wolf and cabbage not left unattentive" 
+                (bank_g = bank_c) and not (bank_c <> bank_m);
+
+    guarantee "Goat, wolf and cabbage reaches to the west-bank" 
+               (bank_g and bank_w and bank_c);
+    
+tel
+
+
+node puzzle(w, g, c: bool) returns (o: bool);
+(*@contract import puzzleSpec(w, g, c) returns (o); *)
+-- Ferryman,goat,cabbage,worlf,carry = false --> init_bank
+-- Ferryman,goat,cabbage,worlf,carry = true --> dest_bank
+
+var bank_m: bool;
+var bank_g: bool;
+var bank_w: bool;
+var bank_c: bool;
+
+let
+
+    bank_m = false -> not pre bank_m;
+
+    bank_g = false ->  if (g and pre(bank_g) = pre(bank_m))
+                       then not pre bank_m
+                       else pre bank_g; 
+
+    bank_w = false ->  if (w and pre(bank_w) = pre(bank_m))
+                       then not pre bank_m
+                       else pre bank_w; 
+
+    bank_c = false ->  if (c and pre(bank_c) = pre(bank_m))
+                       then not pre bank_m
+                       else pre bank_c; 
+
+   -- All Ferryman, goat, cabbage and wolf are one side of the river.
+   
+   -- Rowing between two banks.
+--   bank_m = false -> not pre bank_m;
+    -- ferryman = rowing();
+    
+   -- Ferryman ship g,w,c to other side of the bank.
+   -- Ferry don't not leave the goat alone with wolf
+   -- Ferry don't not leave the cabbage alone with goat
+--   bank_g = false -> if g then pre(bank_g) = pre(bank_m) else pre bank_g; 
+--   bank_w = false -> if w then pre(bank_w) = pre(bank_w) else pre bank_w; 
+--   bank_c = false -> if c then pre(bank_c) = pre(bank_c) else pre bank_c; 
+
+   -- Ferryman should not leave goat along with wolf.
+ --  if (pre bank_g = pre bank_w) then bank_m = bank_g;
+    
+    -- carry = if ferryman = goat  then g 
+    --         else
+    --         if ferryman = cabbage then c
+    --         else         
+    --         if ferryman = wolf then w
+    --         else
+    --             e;
+                
+    -- goat = (bank_m = goat) and pre carry = g 
+    -- -- Wolf and goat should not remain on any side together when man is not present.  
+    
+    -- -- Goat and cabbage should not remain on any side together when man is not present.  
+
+    -- -- Goal we want to port the everyone to other side of the bank.
+tel
+
+-- contract move_bank(i:bool) returns (o:bool);
+-- bool_choose() simulates a non-deterministic choice,
+-- at each step of the computation, between the two Boolean values.
+-- node imported rowing() returns (b: bool) ;
