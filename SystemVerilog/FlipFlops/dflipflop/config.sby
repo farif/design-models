@@ -1,0 +1,15 @@
+[options]
+mode prove
+depth 100
+
+[engines]
+smtbmc
+
+[script]
+read -formal dflipflop.sv
+prep -top dflipflopspec
+
+
+[files]
+dflipflop.sv
+dflipflop.v

@@ -1,0 +1,15 @@
+[options]
+mode bmc
+depth 100
+
+[engines]
+smtbmc
+
+[script]
+read -formal updowncounter.sv
+prep -top up_down_counter_sva
+
+
+[files]
+updowncounter.sv
+updowncounter.v

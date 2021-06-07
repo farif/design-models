@@ -1,0 +1,14 @@
+[options]
+mode prove
+
+[engines]
+smtbmc
+
+[script]
+read -formal stopwatch1.sv
+prep -top stopwatch1
+
+
+[files]
+stopwatch1.sv
+

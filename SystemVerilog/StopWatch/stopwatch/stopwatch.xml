@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites disabled="0" errors="1" failures="0" tests="1" time="0">
+<testsuite disabled="0" errors="1" failures="0" name="stopwatch" skipped="0" tests="1" time="0">
+<properties>
+<property name="os" value="posix"/>
+</properties>
+<testcase classname="stopwatch" name="default" status="ERROR" time="0">
+<error message="ERROR" type="ERROR"/>
+<system-out>SBY  5:38:13 [stopwatch] Removing directory 'stopwatch'.
+SBY  5:38:13 [stopwatch] Copy 'stopwatch.sv' to 'stopwatch/src/stopwatch.sv'.
+SBY  5:38:13 [stopwatch] Copy 'stopwatch.v' to 'stopwatch/src/stopwatch.v'.
+SBY  5:38:13 [stopwatch] engine_0: smtbmc
+SBY  5:38:13 [stopwatch] base: starting process &quot;cd stopwatch/src; yosys -ql ../model/design.log ../model/design.ys&quot;
+SBY  5:38:13 [stopwatch] base: stopwatch.sv:27: ERROR: syntax error, unexpected OP_LE, expecting TOK_ID or '#'
+SBY  5:38:13 [stopwatch] base: finished (returncode=1)
+SBY  5:38:13 [stopwatch] base: job failed. ERROR.
+SBY  5:38:13 [stopwatch] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY  5:38:13 [stopwatch] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY  5:38:13 [stopwatch] DONE (ERROR, rc=16)
+</system-out></testcase></testsuite></testsuites>

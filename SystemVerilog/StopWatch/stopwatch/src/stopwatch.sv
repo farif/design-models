@@ -24,7 +24,7 @@ stopwatch stopwatch0(
 
   assume property (!toggle & !reset);  
   
-  on <=  $past(on) ^ toggle;
+  on <=  (#on) ^ toggle;
 
   assert property (timer >= 0);
   //Running

@@ -1,0 +1,30 @@
+SBY 10:03:48 [ferryman] Removing directory 'ferryman'.
+SBY 10:03:48 [ferryman] Copy 'ferryman.sv' to 'ferryman/src/ferryman.sv'.
+SBY 10:03:48 [ferryman] engine_0: smtbmc
+SBY 10:03:48 [ferryman] base: starting process "cd ferryman/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 10:03:48 [ferryman] base: finished (returncode=0)
+SBY 10:03:48 [ferryman] smt2: starting process "cd ferryman/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 10:03:48 [ferryman] smt2: finished (returncode=0)
+SBY 10:03:48 [ferryman] engine_0: starting process "cd ferryman; yosys-smtbmc --presat --unroll -c --noprogress -t 20  --append 0 --dump-vcd engine_0/trace%.vcd --dump-vlogtb engine_0/trace%_tb.v --dump-smtc engine_0/trace%.smtc model/design_smt2.smt2"
+SBY 10:03:48 [ferryman] engine_0: ##   0:00:00  Solver: yices
+SBY 10:03:48 [ferryman] engine_0: ##   0:00:00  Checking cover reachability in step 0..
+SBY 10:03:48 [ferryman] engine_0: ##   0:00:00  Checking cover reachability in step 1..
+SBY 10:03:48 [ferryman] engine_0: ##   0:00:00  Checking cover reachability in step 2..
+SBY 10:03:48 [ferryman] engine_0: ##   0:00:00  Checking cover reachability in step 3..
+SBY 10:03:48 [ferryman] engine_0: ##   0:00:00  Checking cover reachability in step 4..
+SBY 10:03:48 [ferryman] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 10:03:48 [ferryman] engine_0: ##   0:00:00  Checking cover reachability in step 6..
+SBY 10:03:48 [ferryman] engine_0: ##   0:00:00  Checking cover reachability in step 7..
+SBY 10:03:48 [ferryman] engine_0: ##   0:00:00  Checking cover reachability in step 8..
+SBY 10:03:48 [ferryman] engine_0: ##   0:00:00  Reached cover statement at ferryman.sv:26.12-28.39 in step 8.
+SBY 10:03:48 [ferryman] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace0.vcd
+SBY 10:03:48 [ferryman] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace0_tb.v
+SBY 10:03:48 [ferryman] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace0.smtc
+SBY 10:03:48 [ferryman] engine_0: ##   0:00:00  Status: passed
+SBY 10:03:48 [ferryman] engine_0: finished (returncode=0)
+SBY 10:03:48 [ferryman] engine_0: Status returned by engine: pass
+SBY 10:03:48 [ferryman] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 10:03:48 [ferryman] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 10:03:48 [ferryman] summary: engine_0 (smtbmc) returned pass
+SBY 10:03:48 [ferryman] summary: trace: ferryman/engine_0/trace0.vcd
+SBY 10:03:48 [ferryman] DONE (PASS, rc=0)

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites disabled="0" errors="1" failures="0" tests="1" time="0">
+<testsuite disabled="0" errors="1" failures="0" name="updowncounter" skipped="0" tests="1" time="0">
+<properties>
+<property name="os" value="posix"/>
+</properties>
+<testcase classname="updowncounter" name="default" status="ERROR" time="0">
+<error message="ERROR" type="ERROR"/>
+<system-out>SBY 11:38:59 [updowncounter] Removing directory 'updowncounter'.
+SBY 11:38:59 [updowncounter] Copy 'updowncounter.sv' to 'updowncounter/src/updowncounter.sv'.
+SBY 11:38:59 [updowncounter] Copy 'updowncounter.v' to 'updowncounter/src/updowncounter.v'.
+SBY 11:38:59 [updowncounter] engine_0: smtbmc
+SBY 11:38:59 [updowncounter] base: starting process &quot;cd updowncounter/src; yosys -ql ../model/design.log ../model/design.ys&quot;
+SBY 11:38:59 [updowncounter] base: updowncounter.sv:20: ERROR: syntax error, unexpected TOK_OR_ASSIGN
+SBY 11:38:59 [updowncounter] base: finished (returncode=1)
+SBY 11:38:59 [updowncounter] base: job failed. ERROR.
+SBY 11:38:59 [updowncounter] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 11:38:59 [updowncounter] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 11:38:59 [updowncounter] DONE (ERROR, rc=16)
+</system-out></testcase></testsuite></testsuites>

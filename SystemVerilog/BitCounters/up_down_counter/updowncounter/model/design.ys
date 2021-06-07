@@ -1,0 +1,15 @@
+# running in updowncounter/src/
+read -formal updowncounter.sv
+prep -top up_down_counter_sva
+
+
+memory_nordff
+async2sync
+chformal -assume -early
+chformal -live -fair -cover -remove
+opt_clean
+setundef -anyseq
+opt -keepdc -fast
+check
+hierarchy -simcheck
+write_ilang ../model/design.il

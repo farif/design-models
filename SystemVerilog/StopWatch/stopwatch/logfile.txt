@@ -1,0 +1,11 @@
+SBY  5:38:13 [stopwatch] Removing directory 'stopwatch'.
+SBY  5:38:13 [stopwatch] Copy 'stopwatch.sv' to 'stopwatch/src/stopwatch.sv'.
+SBY  5:38:13 [stopwatch] Copy 'stopwatch.v' to 'stopwatch/src/stopwatch.v'.
+SBY  5:38:13 [stopwatch] engine_0: smtbmc
+SBY  5:38:13 [stopwatch] base: starting process "cd stopwatch/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY  5:38:13 [stopwatch] base: stopwatch.sv:27: ERROR: syntax error, unexpected OP_LE, expecting TOK_ID or '#'
+SBY  5:38:13 [stopwatch] base: finished (returncode=1)
+SBY  5:38:13 [stopwatch] base: job failed. ERROR.
+SBY  5:38:13 [stopwatch] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY  5:38:13 [stopwatch] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY  5:38:13 [stopwatch] DONE (ERROR, rc=16)

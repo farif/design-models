@@ -1,0 +1,66 @@
+SBY  9:26:28 [ferryman] Removing directory 'ferryman'.
+SBY  9:26:28 [ferryman] Copy 'ferryman.sv' to 'ferryman/src/ferryman.sv'.
+SBY  9:26:28 [ferryman] engine_0: smtbmc
+SBY  9:26:28 [ferryman] base: starting process "cd ferryman/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY  9:26:28 [ferryman] base: finished (returncode=0)
+SBY  9:26:28 [ferryman] smt2: starting process "cd ferryman/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY  9:26:28 [ferryman] smt2: finished (returncode=0)
+SBY  9:26:28 [ferryman] engine_0.basecase: starting process "cd ferryman; yosys-smtbmc --presat --unroll --noprogress -t 20  --append 0 --dump-vcd engine_0/trace.vcd --dump-vlogtb engine_0/trace_tb.v --dump-smtc engine_0/trace.smtc model/design_smt2.smt2"
+SBY  9:26:28 [ferryman] engine_0.induction: starting process "cd ferryman; yosys-smtbmc --presat --unroll -i --noprogress -t 20  --append 0 --dump-vcd engine_0/trace_induct.vcd --dump-vlogtb engine_0/trace_induct_tb.v --dump-smtc engine_0/trace_induct.smtc model/design_smt2.smt2"
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Solver: yices
+SBY  9:26:28 [ferryman] engine_0.induction: ##   0:00:00  Solver: yices
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assumptions in step 0..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assertions in step 0..
+SBY  9:26:28 [ferryman] engine_0.induction: ##   0:00:00  Trying induction in step 20..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assumptions in step 1..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assertions in step 1..
+SBY  9:26:28 [ferryman] engine_0.induction: ##   0:00:00  Trying induction in step 19..
+SBY  9:26:28 [ferryman] engine_0.induction: ##   0:00:00  Temporal induction successful.
+SBY  9:26:28 [ferryman] engine_0.induction: ##   0:00:00  Status: passed
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assumptions in step 2..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assertions in step 2..
+SBY  9:26:28 [ferryman] engine_0.induction: finished (returncode=0)
+SBY  9:26:28 [ferryman] engine_0: Status returned by engine for induction: pass
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assumptions in step 3..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assertions in step 3..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assumptions in step 4..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assertions in step 4..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assumptions in step 5..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assertions in step 5..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assumptions in step 6..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assertions in step 6..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assumptions in step 7..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assertions in step 7..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assumptions in step 8..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assertions in step 8..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assumptions in step 9..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assertions in step 9..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assumptions in step 10..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assertions in step 10..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assumptions in step 11..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assertions in step 11..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assumptions in step 12..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assertions in step 12..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assumptions in step 13..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assertions in step 13..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assumptions in step 14..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assertions in step 14..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assumptions in step 15..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assertions in step 15..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assumptions in step 16..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assertions in step 16..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assumptions in step 17..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assertions in step 17..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assumptions in step 18..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assertions in step 18..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assumptions in step 19..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Checking assertions in step 19..
+SBY  9:26:28 [ferryman] engine_0.basecase: ##   0:00:00  Status: passed
+SBY  9:26:29 [ferryman] engine_0.basecase: finished (returncode=0)
+SBY  9:26:29 [ferryman] engine_0: Status returned by engine for basecase: pass
+SBY  9:26:29 [ferryman] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY  9:26:29 [ferryman] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY  9:26:29 [ferryman] summary: engine_0 (smtbmc) returned pass for induction
+SBY  9:26:29 [ferryman] summary: engine_0 (smtbmc) returned pass for basecase
+SBY  9:26:29 [ferryman] summary: successful proof by k-induction.
+SBY  9:26:29 [ferryman] DONE (PASS, rc=0)

@@ -15,12 +15,10 @@ dflipflop DFLIPFLOP(
   .q1(q1)
 );
 
-always @(posedge clk) begin
-    assert property (q0 != q1) ; 
-end
-
 // always @(posedge clk) begin
-//     assert property (d |-> (q0 == d)) ; 
+    assert property (q0 != q1) ; 
+
+    // assert property (d |-> q0 == d) ; 
 // end
 
 

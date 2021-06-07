@@ -1,0 +1,14 @@
+[options]
+mode prove
+
+[engines]
+smtbmc
+
+[script]
+read -formal ferryman.sv
+prep -top ferryman
+
+
+[files]
+ferryman.sv
+

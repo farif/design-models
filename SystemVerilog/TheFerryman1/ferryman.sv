@@ -24,9 +24,10 @@ module ferryman(
         if (bank_g != bank_m) begin
             assume (bank_g != bank_c);
         end
-    // Safely cross the river
-    cover (bank_w && bank_g && bank_c);
 
-    end    
+        // Safely cross the river
+        assert (bank_w <= 1 & bank_g <= 1 & bank_c <= 1);
     
+    end    
+
 endmodule

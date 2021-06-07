@@ -1,0 +1,15 @@
+# running in stopwatch1/src/
+read -formal stopwatch1.sv
+prep -top stopwatch1
+
+
+memory_nordff
+async2sync
+chformal -assume -early
+chformal -live -fair -cover -remove
+opt_clean
+setundef -anyseq
+opt -keepdc -fast
+check
+hierarchy -simcheck
+write_ilang ../model/design.il

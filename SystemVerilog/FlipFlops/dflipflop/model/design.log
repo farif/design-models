@@ -1,0 +1,276 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Wolf <claire@symbioticeda.com>          |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.9+3981 (git sha1 0e0f8429, gcc 9.3.0-17ubuntu1~20.04 -fPIC -Os)
+
+
+-- Executing script file `../model/design.ys' --
+
+1. Executing Verilog-2005 frontend: dflipflop.sv
+Parsing formal SystemVerilog input from `dflipflop.sv' to AST representation.
+Storing AST representation for module `$abstract\dflipflop'.
+Storing AST representation for module `$abstract\dflipflopspec'.
+Successfully finished Verilog frontend.
+
+2. Executing PREP pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.2. Executing AST frontend in derive mode using pre-parsed AST for module `\dflipflopspec'.
+Generating RTLIL representation for module `\dflipflopspec'.
+
+2.2.1. Analyzing design hierarchy..
+Top module:  \dflipflopspec
+
+2.2.2. Executing AST frontend in derive mode using pre-parsed AST for module `\dflipflop'.
+Generating RTLIL representation for module `\dflipflop'.
+
+2.2.3. Analyzing design hierarchy..
+Top module:  \dflipflopspec
+Used module:     \dflipflop
+
+2.2.4. Analyzing design hierarchy..
+Top module:  \dflipflopspec
+Used module:     \dflipflop
+Removing unused module `$abstract\dflipflopspec'.
+Removing unused module `$abstract\dflipflop'.
+Removed 2 unused modules.
+Module dflipflopspec directly or indirectly contains formal properties -> setting "keep" attribute.
+
+2.3. Executing PROC pass (convert processes to netlists).
+
+2.3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$dflipflop.v:15$4 in module dflipflop.
+Removed a total of 0 dead cases.
+
+2.3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 1 redundant assignment.
+Promoted 0 assignments to connections.
+
+2.3.4. Executing PROC_INIT pass (extract init attributes).
+
+2.3.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \reset in `\dflipflop.$proc$dflipflop.v:15$4'.
+
+2.3.6. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\dflipflop.$proc$dflipflop.v:15$4'.
+     1/1: $0\q0[0:0]
+
+2.3.7. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+2.3.8. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\dflipflop.\q0' using process `\dflipflop.$proc$dflipflop.v:15$4'.
+  created $adff cell `$procdff$5' with positive edge clock and positive level reset.
+
+2.3.9. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `dflipflop.$proc$dflipflop.v:15$4'.
+Cleaned up 0 empty switches.
+
+2.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module dflipflop.
+Optimizing module dflipflopspec.
+
+2.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \dflipflop..
+Finding unused cells or wires in module \dflipflopspec..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+2.6. Executing CHECK pass (checking for obvious problems).
+Checking module dflipflop...
+Checking module dflipflopspec...
+Found and reported 0 problems.
+
+2.7. Executing OPT pass (performing simple optimizations).
+
+2.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module dflipflop.
+Optimizing module dflipflopspec.
+
+2.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\dflipflop'.
+Finding identical cells in module `\dflipflopspec'.
+Removed a total of 0 cells.
+
+2.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \dflipflop..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \dflipflopspec..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+2.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \dflipflop.
+  Optimizing cells in module \dflipflopspec.
+Performed a total of 0 changes.
+
+2.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\dflipflop'.
+Finding identical cells in module `\dflipflopspec'.
+Removed a total of 0 cells.
+
+2.7.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \dflipflop..
+Finding unused cells or wires in module \dflipflopspec..
+
+2.7.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module dflipflop.
+Optimizing module dflipflopspec.
+
+2.7.8. Finished OPT passes. (There is nothing left to do.)
+
+2.8. Executing WREDUCE pass (reducing word size of cells).
+
+2.9. Executing MEMORY_DFF pass (merging $dff cells to $memrd and $memwr).
+
+2.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \dflipflop..
+Finding unused cells or wires in module \dflipflopspec..
+
+2.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.12. Executing OPT pass (performing simple optimizations).
+
+2.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module dflipflop.
+Optimizing module dflipflopspec.
+
+2.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\dflipflop'.
+Finding identical cells in module `\dflipflopspec'.
+Removed a total of 0 cells.
+
+2.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \dflipflop..
+Finding unused cells or wires in module \dflipflopspec..
+
+2.12.4. Finished fast OPT passes.
+
+2.13. Printing statistics.
+
+=== dflipflop ===
+
+   Number of wires:                  5
+   Number of wire bits:              5
+   Number of public wires:           5
+   Number of public wire bits:       5
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  2
+     $adff                           1
+     $not                            1
+
+=== dflipflopspec ===
+
+   Number of wires:                  6
+   Number of wire bits:              6
+   Number of public wires:           5
+   Number of public wire bits:       5
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  3
+     $assert                         1
+     $ne                             1
+     dflipflop                       1
+
+=== design hierarchy ===
+
+   dflipflopspec                     1
+     dflipflop                       1
+
+   Number of wires:                 11
+   Number of wire bits:             11
+   Number of public wires:          10
+   Number of public wire bits:      10
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  4
+     $adff                           1
+     $assert                         1
+     $ne                             1
+     $not                            1
+
+2.14. Executing CHECK pass (checking for obvious problems).
+Checking module dflipflop...
+Checking module dflipflopspec...
+Found and reported 0 problems.
+
+3. Executing MEMORY_NORDFF pass (extracting $dff cells from memories).
+
+4. Executing ASYNC2SYNC pass.
+Replacing dflipflop.$procdff$5 ($adff): ARST=\reset, D=\d, Q=\q0
+
+5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \dflipflop..
+Finding unused cells or wires in module \dflipflopspec..
+
+6. Executing SETUNDEF pass (replace undef values with defined constants).
+
+7. Executing OPT pass (performing simple optimizations).
+
+7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module dflipflop.
+Optimizing module dflipflopspec.
+
+7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\dflipflop'.
+Finding identical cells in module `\dflipflopspec'.
+Removed a total of 0 cells.
+
+7.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \dflipflop..
+Finding unused cells or wires in module \dflipflopspec..
+
+7.5. Finished fast OPT passes.
+
+8. Executing CHECK pass (checking for obvious problems).
+Checking module dflipflop...
+Checking module dflipflopspec...
+Found and reported 0 problems.
+
+9. Executing HIERARCHY pass (managing design hierarchy).
+
+9.1. Analyzing design hierarchy..
+Top module:  \dflipflopspec
+Used module:     \dflipflop
+
+9.2. Analyzing design hierarchy..
+Top module:  \dflipflopspec
+Used module:     \dflipflop
+Removed 0 unused modules.
+Module dflipflopspec directly or indirectly contains formal properties -> setting "keep" attribute.
+
+10. Executing RTLIL backend.
+Output filename: ../model/design.il
+
+End of script. Logfile hash: df9eceb826, CPU: user 0.01s system 0.00s, MEM: 11.68 MB peak
+Yosys 0.9+3981 (git sha1 0e0f8429, gcc 9.3.0-17ubuntu1~20.04 -fPIC -Os)
+Time spent: 29% 6x opt_clean (0 sec), 26% 5x opt_expr (0 sec), ...

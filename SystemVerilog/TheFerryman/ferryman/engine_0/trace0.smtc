@@ -1,0 +1,61 @@
+initial
+assume (= [$formal$ferryman.sv:10$1_EN] false)
+assume (= [$formal$ferryman.sv:26$4_CHECK] false)
+assume (= [bank_c] false)
+assume (= [bank_g] false)
+assume (= [bank_m] false)
+assume (= [bank_w] false)
+
+state 0
+assume (= [c] false)
+assume (= [clk] false)
+assume (= [g] true)
+assume (= [w] false)
+
+state 1
+assume (= [c] false)
+assume (= [clk] false)
+assume (= [g] false)
+assume (= [w] false)
+
+state 2
+assume (= [c] true)
+assume (= [clk] false)
+assume (= [g] false)
+assume (= [w] false)
+
+state 3
+assume (= [c] false)
+assume (= [clk] false)
+assume (= [g] true)
+assume (= [w] false)
+
+state 4
+assume (= [c] false)
+assume (= [clk] false)
+assume (= [g] false)
+assume (= [w] true)
+
+state 5
+assume (= [c] false)
+assume (= [clk] false)
+assume (= [g] true)
+assume (= [w] false)
+
+state 6
+assume (= [c] false)
+assume (= [clk] false)
+assume (= [g] true)
+assume (= [w] false)
+
+state 7
+assume (= [c] false)
+assume (= [clk] false)
+assume (= [g] true)
+assume (= [w] false)
+
+state 8
+assume (= [c] false)
+assume (= [clk] false)
+assume (= [g] false)
+assume (= [w] false)
