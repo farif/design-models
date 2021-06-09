@@ -1,4 +1,4 @@
-`include "counter.v"
+`include "fifo_design.sv"
 
 module counterspec (
     input clk, rst,
