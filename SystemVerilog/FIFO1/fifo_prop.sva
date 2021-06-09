@@ -1,6 +1,6 @@
 `include "fifo_design.sv"
 
-module counterspec (
+module counter (
     input clk, rst,
     output reg [5:0] cnt 
 );
