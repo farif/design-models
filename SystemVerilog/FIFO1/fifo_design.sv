@@ -4,7 +4,7 @@ module counter( clk, rst,
 
 input logic clk;
 input logic rst;
-output logic [5:0] cnt;
+output logic [5:0] cnt = 6'b000000;
 
 always_ff @(posedge clk) begin
 if (cnt == 15) begin

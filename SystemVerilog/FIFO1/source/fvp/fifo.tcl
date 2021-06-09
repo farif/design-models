@@ -7,7 +7,7 @@ clear -all
 
 
 # Verification
-analyze -sv fifo_design.sva
+analyze -sv fifo_design.sv
 
 
 # Elaborate Design and Properties
