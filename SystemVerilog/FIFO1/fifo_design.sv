@@ -7,7 +7,7 @@ input logic rst;
 output logic [5:0] cnt = 6'b000000;
 
 always_ff @(posedge clk) begin
-if (cnt == 35) begin
+if (cnt == 31) begin
 cnt <= 0;
 end
 else if (rst) begin
