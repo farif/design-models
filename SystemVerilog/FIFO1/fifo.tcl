@@ -1,23 +1,19 @@
-clear -all
-
 # Setting Path
-#set ROOT_PATH ..
-#set RTL_PATH ${ROOT_PATH}/design
-#set PROP_PATH ${ROOT_PATH}/properties
+set ROOT_PATH ..
+set RTL_PATH ${ROOT_PATH}/design
+set PROP_PATH ${ROOT_PATH}/properties
 
 
 # Verification
-analyze -sv fifo_design.sva
-
-
-# Elaborate Design and Properties
-elaborate -top counter
+analyze -sv ${RTL_PATH}/fifo_design.sva
 
 # Analyze property files
 #analyze -sv \
 #  ${PROP_PATH}/bindings.sva \
 #  ${PROP_PATH}/fifo_prop.sva
-# analyze -sv09 -req imul_spec.va
+
+# Elaborate Design and Properties
+elaborate -top fifo
 
 # Setting-up Clock and Resets
 clock clk
