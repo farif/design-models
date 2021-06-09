@@ -5,15 +5,8 @@ module counterspec (
     output reg [5:0] cnt 
 );
 
-//Module Instantiation
-counter COUNTER(
-    .clk(clk),
-    .cnt(cnt)
-);
 
+fifo_counter: assert property (@(posedge clk)   cnt < 32);
 
-always_ff @(posedge clk) begin
-    assert (cnt < 32);
-end
 
 endmodule
