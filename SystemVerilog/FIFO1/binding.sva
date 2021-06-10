@@ -1,0 +1,9 @@
+bind fifo
+  v_fifo i_fifo (
+  .clk(clk), .rst(rst),
+  .number_of_current_entries(number_of_current_entries), 
+  .in_read_ctrl(in_read_ctrl), 
+  .in_write_ctrl(in_write_ctrl), 
+  .out_is_full(out_is_full), 
+  .out_is_empty(out_is_empty)
+);
