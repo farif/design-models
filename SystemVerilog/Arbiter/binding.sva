@@ -1,0 +1,8 @@
+bind arbiter
+  fv_arbiter i_arbiter (
+  .clk(clk), .rst(rst),
+  .req(req), 
+  .opcode(opcode), 
+  .gnt(gnt), 
+  .op_error(op_error)
+  );

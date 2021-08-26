@@ -1,0 +1,39 @@
+module fv_fifo(clk, rst, head_ptr, write_event, read_event, Q_FULL, Q_EMPTY);
+    
+    //Make an assumption that read and write does not enable at the same time.
+
+    input logic clk;
+    input logic rst;
+    input logic [7:0] head_ptr;
+    input logic write_event;
+    input logic read_event;
+
+    input logic Q_EMPTY;
+    input logic Q_FULL;
+
+    default clocking c0 @(posedge clk); endclocking
+    // Assume: specifies property as assumption for the verification enviroment
+    fifo_assume_empty: assume property (@(posedge clk)   Q_EMPTY    |->     ~read_event);
+    fifo_assume_full: assume property  (@(posedge clk)   Q_FULL     |->     ~write_event);
+    
+    // Coverage: grant asserted
+    fifo_num_entries_6: cover property (head_ptr == 6);
+    fifo_num_entries_5: cover property (head_ptr == 5);
+    fifo_num_entries_4: cover property (head_ptr == 4);
+    fifo_num_entries_3: cover property (head_ptr == 3);
+    fifo_num_entries_2: cover property (head_ptr == 2);
+    fifo_num_entries_1: cover property (head_ptr == 1);
+    fifo_num_entries_0: cover property (head_ptr == 0);
+    
+//     -- Safety Assertions:
+// --P1. Queue should never be empty and full at the same time.
+//     check not(Q_EMPTY and Q_FULL);
+// --P2. Queue becomes full then previously there was a write event.
+//     check true -> not(pre Q_FULL) and Q_FULL => pre write_event;
+// --P3. Queue becomes empty then previously there was a read event.
+//     check true -> not(pre Q_EMPTY) and Q_EMPTY => pre read_event;
+// --P4. Simaltanous read and write events do not overflow or underflow the queue. 
+//     check true -> read_event and write_event => Sofar(Q_EMPTY = Q_EMPTY) and Sofar(Q_FULL = Q_FULL) ;
+// --P5. What goes in first should come out first (Order of messages remain preserved)?  
+
+endmodule

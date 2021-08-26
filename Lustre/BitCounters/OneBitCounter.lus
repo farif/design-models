@@ -1,0 +1,34 @@
+(*
+       +------------------------------------------------------------+
+       |                                                            |
+       | +--------------------------------------------------------+ |
+       | |                                              +-------+ | |
+       +-|-----------------------------------|``-.  set |       | | |
+       | |                          |`-._    |    :---->|       | | |
+       | +->|``-.                +--|   _]o--|..-`      | Latch | | |
+       |    |    :--+----\``-.   |  |.-`          reset |       |-+-+--> out
+  inc -+----|..-`   |     )   :--+--------------------->|       |   |
+       |            | +--/..-`                          +-------+   |
+       |            | |                                             |
+start ----------------+                OneBitCounter                |
+       |            |                                               |
+       +------------+-----------------------------------------------+
+                    |     
+                    v carry
+*)
+
+node Latch(set, reset:bool) returns (out: bool)
+var next_out: bool;
+let
+    out = false -> pre(next_out);
+    next_out = (set and not reset) or (not set and not reset and out);
+tel
+
+node OneBitCounter(start, incr: bool) returns (out, carry: bool);
+var set, reset: bool;
+let
+    out = Latch(set, reset);
+    set = incr and not reset; 
+    reset = start or carry;
+    carry = incr and out;
+tel

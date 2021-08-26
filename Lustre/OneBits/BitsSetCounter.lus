@@ -1,0 +1,39 @@
+-- Count the number of bits set to '1' in one Byte.
+-- Algoritm starts with counting 2 bits pair and then accumulate its results to 4 bits pair to 8 pair  and 16 bits pair.
+--   0x55555555 = 0b01010101010101010101010101010101)
+--   0x33333333 = 0b00110011001100110011001100110011)
+--   0x0F0F0F0F = 0b00001111000011110000111100001111)
+--   0x00FF00FF = 0b00000000111111110000000011111111)
+--   0x0000FFFF = 0b00000000000000001111111111111111)
+-- Design Reference: https://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetNaive
+node CountingBitsSet(i: int) returns (o: uint8);
+(*@contract
+  assume i >= 0 and i <= 255 ;
+  guarantee o >= (uint8 0) and o <= (uint8 8) ;
+*)
+var  x0:uint8;
+var  x1:uint8;
+var  x2:uint8;
+var  x3:uint8;
+var  x4:uint8;
+
+let
+  x0 = (((uint8 i) rsh (uint8 1)) && (uint8 0x5555555) +  ((uint8 i) && (uint8 0x5555555)));
+  x1 = ((x0 rsh (uint8 2)) && (uint8 0x33333333)) +  (x0 && (uint8 0x33333333));
+  x2 = ((x1 rsh (uint8 4)) && (uint8 0x0F0F0F0F)) +  (x1 && (uint8 0x0F0F0F0F));
+  x3 = ((x2 rsh (uint8 8)) && (uint8 0x00FF00FF)) +  (x2 && (uint8 0x00FF00FF));
+  x4 = ((x3 rsh (uint8 16)) && (uint8 0x0000FFFF)) +  (x2 && (uint8 0x0000FFFF));
+  o = x4;    
+tel
+
+-- Test Input
+-- 217 = b11011001
+const input: int = 217;
+const ones: int = 5; 
+
+node Checker() returns (sbits: int);
+let
+    sbits = (int CountingBitsSet(input));
+    -- Check computed set bits are equal to specified bits.
+    check sbits = ones;
+tel

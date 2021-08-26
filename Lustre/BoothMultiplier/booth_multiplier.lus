@@ -1,0 +1,30 @@
+-- Put multiplicand in BR and multiplier in QR 
+-- and then the algorithm works as per the following conditions : 
+-- 1. If Qn and Qn+1 are same i.e. 00 or 11 perform arithemetic shift by 1 bit. 
+-- 2. If Qn Qn+1 = 10 do A= A + BR and perform arithemetic shift by 1 bit. 
+-- 3. If Qn Qn+1 = 01 do A= A – BR and perform arithemetic shift by 1 bit. 
+
+node BoothBitMultiplier( BR: uint8; QR : uint8 ) returns ( R : uint16 );
+var P: uint16 ; 
+var S: uint16 ; 
+
+--var Qn:  bool ;
+--var Qm: bool ;
+const C: uint8 = 1;
+const B1: uint16 = 255;
+const B2: uint16 = 65280;
+let
+  P = (uint8 0) B xor B;
+  R = uint8 (BR * QR);
+tel
+
+node BoothMultiplier( BR : int; QR : int ) returns ( A : int );
+let
+  A = BR * QR;
+tel
+
+-- Trigger a Parsing Bug
+-- node BoothBitMultiplier( BR: uint8; QR : uint8 ) returns ( R : uint16 );
+-- let
+--   R = uint16 (BR * QR);
+-- tel

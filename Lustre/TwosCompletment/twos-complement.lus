@@ -1,0 +1,46 @@
+--               _______________________________________________________
+--              \   ___        _________                               \
+--    in_bit -->\--|NOT)----->| BIT    \--> sum       ___________      \--> out_bit
+--              \  ----    -->| ADDER  \--> carry -->\ Flip-Flop\---.  \
+--              \          .  |________\             \__________\   .  \
+--              \          ..........................................  \
+--      clk --> \                                                      \
+--              \______________________________________________________\
+node Two_complement(in_bit: bool) returns(out_bit: bool);
+var carry: bool;
+let
+    (out_bit, carry) = BitAdder(not(in_bit), Flipflop(carry)) ;
+
+    check (First(in_bit)) => First(out_bit);
+tel
+
+-- One Bit Adder
+node BitAdder(a, b: bool) returns (sum, c_out: bool);
+let
+    sum = a xor b;
+    c_out = a and b;
+tel
+
+-- D Type Flip-Flop with only Set output
+node Flipflop(D: bool) returns (Q: bool);
+let
+    Q = true -> pre D;
+tel
+
+
+
+-- Temporal Operators
+node First(i: bool) returns (o:bool);
+let
+    o = i and Sofar(Z(not i));
+tel
+-- Historically or Sofar
+node Sofar( i : bool ) returns ( o : bool );
+let
+ o = i -> (i and (pre o));
+tel
+-- Yesterday with start true state
+node Z(i: bool) returns (o:bool);
+let
+    o = true -> (pre i);
+tel

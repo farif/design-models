@@ -1,0 +1,10 @@
+bind fifo
+  fv_fifo i_fifo (
+  .clk(clk), .rst(rst),
+  .write_event(write_event), 
+  .read_event(read_event),
+  .head_ptr(head_ptr), 
+  .Q_FULL(Q_FULL),
+  .Q_EMPTY(Q_EMPTY)
+);
+

@@ -1,0 +1,72 @@
+-------------------------------------------------
+--  FIFO Interface:
+--                    __________
+--                   \          \
+--        data_in -->\          \--> data_out
+--    write_event -->\   FIFO   \<-- read_event
+--         Q_FULL <--\          \--> Q_EMPTY
+--                   \__________\
+--
+-- I/O with Producer:
+-- data_in: data input port.
+-- write_event: sending write signal.
+-- Q_FULL: Queue is full.
+--
+-- I/O with Consumer:
+-- data_out: Data output port.
+-- read_event: Read signal.
+-- Q_EMPTY: Queue is empty and contains no message. 
+---------------------------------------------------
+
+-- Model of FIFO queue
+type msg = int;
+const MAX:int = 8;
+
+node FIFO(data_in :msg; write_event, read_event :bool) returns (data_out :msg; Q_EMPTY, Q_FULL :bool);
+-- Capacity of Queue
+var mem :msg^MAX;
+-- Pointer to current insereted msg. 
+var msg_adr :int;
+-- The memory layout]:
+--          mem_adr    
+--               |
+--           <-- v    
+--[7 6 5 4 3 2 1 0] 
+let
+    
+    msg_adr = 0 -> if (read_event and write_event) then pre msg_adr else 
+             if(not Q_FULL and write_event) then (pre msg_adr + 1)  -- push event 
+             else if(not Q_EMPTY and read_event) then (pre msg_adr - 1)  -- pop event
+             else pre msg_adr;
+             
+   Q_FULL = false -> (pre msg_adr = 7);
+   Q_EMPTY = true -> (pre msg_adr = 0);
+
+   mem[msg_adr] = -1 -> if write_event and msg_adr < 7 then data_in else pre mem[msg_adr];
+   data_out = -1 -> if read_event then mem[1] else -1 ;
+tel
+
+-- Safety Assertions.
+node FIFO_Specs(data_in :int; write_event, read_event :bool) returns (data_out :int; Q_EMPTY, Q_FULL :bool);
+let
+
+    (data_out, Q_EMPTY, Q_FULL) = FIFO(data_in,write_event,read_event);
+-- Safety Assertions:
+--P1. Queue should never be empty and full at the same time.
+    check not(Q_EMPTY and Q_FULL);
+--P2. Queue becomes full then previously there was a write event.
+    check true -> not(pre Q_FULL) and Q_FULL => pre write_event;
+--P3. Queue becomes empty then previously there was a read event.
+    check true -> not(pre Q_EMPTY) and Q_EMPTY => pre read_event;
+--P4. Simaltanous read and write events do not overflow or underflow the queue. 
+    check true -> read_event and write_event => Sofar(Q_EMPTY = Q_EMPTY) and Sofar(Q_FULL = Q_FULL) ;
+--P5. What goes in first should come out first (Order of messages remain preserved)?  
+tel
+
+
+-- Auxiliary Temporal Operator in PLTL (Historically)
+-- Sofar(\phi) is true at any point iff \phi has been true from the beginning until that point
+node Sofar( i : bool ) returns ( o : bool );
+let
+ o = i -> (i and (pre o));
+tel

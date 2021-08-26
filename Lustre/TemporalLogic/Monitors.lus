@@ -1,0 +1,96 @@
+---------------------------
+-- Past-time LTL operators:
+---------------------------
+node Y (i: bool) returns (o: bool) ;
+let
+  o = false -> pre i;
+tel
+
+node Z (i: bool) returns (o: bool) ;
+let
+  o = true -> pre i;
+tel
+
+node O (i: bool) returns (o: bool) ;
+let
+  o = i or Y(o);
+tel
+
+node H (i: bool) returns (o: bool) ;
+let
+  o = i and Z(o);
+tel
+-- Since Opertaor
+node S( i, j: bool ) returns ( o: bool );
+let
+    o = j or (i and Y(o));
+tel
+
+node Sw( i, j: bool ) returns ( o: bool );
+let
+    o = j or (i and Z(o));
+tel
+
+-- Trigger Opertaor
+node T( i, j: bool ) returns ( o: bool );
+let
+    o = j and (i or Z(o));
+tel
+
+------------------------
+-- Monitoring Operators:
+------------------------
+-- Start a.k.a. Rising Edge
+node Start( i: bool ) returns ( o: bool );
+let
+    o = i and not Y(i);
+tel
+
+-- End a.k.a. Falling Edge
+node End( i: bool ) returns ( o: bool );
+let
+    o = not i and Y(i);
+tel
+
+-- First
+node First( i: bool ) returns ( o: bool );
+let
+    o = i and H(Z(not i));
+tel
+
+-- Last
+node Last( i: bool ) returns ( o: bool );
+let
+    o = (not i) and H(Z(i));
+--    o = First (not i);
+tel
+
+-- Interval [i,j] 
+node Interval(i, j: bool) returns (o:bool);
+let
+   o = j or S (not j,  i);  
+tel
+
+-- Interval [i,j) 
+node Intervalx(i, j: bool) returns (o:bool);
+let
+   o = not j or S (not Y(j),  i);  
+tel
+
+
+-- Checking relational equivalence among operators
+node equiv( i, j: bool ) returns ( o: bool );
+let
+    check S(i, true);
+    
+    check H(i) = Sw(i, false);
+    
+    check not O(i) = H(not i);
+    
+    check O(i) = S(true, i);
+    
+    check not T(i, j) = S(not i, not j);
+    
+tel
+
+

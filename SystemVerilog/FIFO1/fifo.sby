@@ -1,0 +1,16 @@
+# Simple SymbiYosys example job utilizing Verific
+
+[options]
+mode prove
+
+[engines]
+smtbmc yices
+
+[script]
+read -formal fifo_prop.sva
+prep -top counterspec
+
+[files]
+fifo_prop.sva
+fifo_design.sv
+

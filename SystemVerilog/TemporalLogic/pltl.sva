@@ -1,0 +1,55 @@
+// Code your design here
+module PLTL_SVA_top(clk, rst, req, gnt, ok);
+    input clk;
+    input rst; 
+   
+    input  req;
+    input  gnt;
+    input  ok;
+   
+     //default clocking @(posedge clk); endclocking
+   
+   property prop_always (p) ;
+         p and nexttime prop_always (p);
+   endproperty
+   initial assert property(@(posedge clk) disable iff (rst) prop_always (ok));
+   
+   property prop_weak_until (p, q);
+     q or(p and nexttime prop_weak_until (p, q));
+   endproperty
+   initial assert property (@(posedge clk) disable iff (rst) prop_weak_until (req, gnt));
+   
+   property Y(p);
+      $past(p);
+   endproperty
+   assert property (@(posedge clk) disable iff (rst) Y(ok));
+   
+   property Z(p);
+     ##0 1'b1 |=> $past(p);
+   endproperty
+     initial assert property (@(posedge clk) disable iff (rst) Z(ok));
+   
+   property prop_Once(p);
+     p or Y(prop_Once(p));
+   endproperty
+     initial assert property (@(posedge clk) disable iff (rst) prop_Once (ok));
+   
+   property prop_Once(p);
+   p or $past(prop_Once(p));
+   endproperty
+   initial assert property (@(posedge clk) disable iff (rst) prop_Once (ok));
+     
+   
+   // property prop_Hence(p);
+   //   p and Y(prop_Hence(p));
+   // endproperty
+   //   initial assert property (@(posedge clk) disable iff (rst) prop_Hence (req));
+   
+   // property prop_Since (p, q);
+   //   q or(p and Y(prop_Since(p, q));
+   // endproperty
+   //   initial assert property (@(posedge clk) disable iff (rst) prop_Since(req, gnt));
+     
+     
+   endmodule
+   
